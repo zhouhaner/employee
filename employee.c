@@ -7,7 +7,7 @@ typedef struct employee
     char duty[10];
     char name[10];
     char sex[3];
-    unsigned char age;
+    int age;
     char edu[10];
     int salary;
     char tel_office[13];
@@ -55,7 +55,7 @@ void addemp()
     
     if((fp=fopen("employee.dat","ab"))==NULL)
     {
-        printf("打开文件employee.dat出错！\n");
+        printf("error can't find employee.dat！\n");
         getchar();
         return;                                         
     }     
@@ -66,46 +66,46 @@ void addemp()
          
          if(emp1==NULL)
          {
-             printf("内存分配失败，按任意键退出！\n");
+             printf("Memory allocation failure, press any key to exit!\n");
              getchar();
              return;              
          }
-         printf("请输入第%d个员工的信息，\n",i);
+         printf("Please enter number %d information of the employees,\n",i);
          bound('_',30);
-         printf("工号：");
+         printf("number：");
          scanf("%d",&emp1->num);
          
-         printf("职务：");
+         printf("duty：");
          scanf("%s",&emp1->duty);
          
-         printf("姓名：");
+         printf("name：");
          scanf("%s",&emp1->name);
          
-         printf("性别：");
+         printf("sex：");
          scanf("%s",&emp1->sex);
          
-         printf("年龄：");
+         printf("age：");
          scanf("%d",&emp1->age);
          
-         printf("文化程度：");
+         printf("edu：");
          scanf("%s",&emp1->edu);
          
-         printf("工资：");
+         printf("salary：");
          scanf("%d",&emp1->salary);
          
-         printf("办公电话：");
+         printf("tel_office：");
          scanf("%s",&emp1->tel_office);
          
-         printf("家庭电话：");
+         printf("tel_home：");
          scanf("%s",&emp1->tel_home);
          
-         printf("移动电话：");
+         printf("mobile：");
          scanf("%s",&emp1->mobile);
          
          printf("QQ:");
          scanf("%s",&emp1->qq);
          
-         printf("地址：");
+         printf("address：");
          scanf("%s",&emp1->address);
          
          emp1->next=NULL;
@@ -123,14 +123,14 @@ void addemp()
          gfirst=0;
          printf("\n");
          bound('_',30);
-         printf("\n是否继续输入?(y/n)");
+         printf("\n continue or not?(y/n)");
          fflush(stdin);
          choice=getchar();
          
          if(toupper(choice)!='Y')
          {
              fclose(fp);
-             printf("\n输入完毕，按任意键返回\n");
+             printf("\n finished,press any key to exit\n");
              getchar();
              return;                        
          }
@@ -161,15 +161,15 @@ void checkfirst()
     
     if((fp=fopen("config.bat","rb"))==NULL)
     {
-        printf("\n新系统，请进行相应的初始化操作！\n");
+        printf("\n please initialize！\n");
         bound('_',50);
         getchar();
         
         do{
-            printf("\n设置密码，请不要超过8位：");
+            printf("\nSet the password, Don't more than eight numbers,please");
             for(i=0;i<8&&((pwd[i]=getchar())!=13);i++)
                 putchar('*');
-            printf("\n再确认一次密码：");
+            printf("\n confirm password:");
             for(i=0;i<8&&((pwd1[i]=getchar())!=13);i++) 
                 putchar('*');    
                 
@@ -177,14 +177,14 @@ void checkfirst()
             pwd1[i]='\0';
             
             if(strcmp(pwd,pwd1)!=0)
-                printf("\n两次密码输入不一致，请重新输入！\n\n");
+                printf("\n Enter the password twice inconsistent, please try again!\n\n");
             else break;
             
         }while(1);
         
         if((fp1=fopen("config.bat","wb"))==NULL)
         {
-            printf("\n系统创建失败，请按任意键退出！");
+            printf("\n The system creates failure, press any key to exit!");
             getchar();
             exit(1);                                        
         }
@@ -199,7 +199,7 @@ void checkfirst()
         }
         
         fclose(fp1);
-        printf("\n\n系统初始化成功，按任意键退出后，再重新进入！\n");
+        printf("\n\n System initialization is successful, press any key to exit and re-enter!\n");
         getchar();
         exit(1);
         
@@ -228,7 +228,7 @@ void delemp()
     char name[10],choice;
     
     system("cls");
-    printf("\n输入要删除的员工姓名：");
+    printf("\n Enter the name of the employee to be deleted：");
     scanf("%s",name);
     
     emp1=emp_first;
@@ -240,24 +240,24 @@ void delemp()
             findok=1;
             system("cls");
             
-            printf("员工：%s的信息如下：",emp1->name);
+            printf("employee:there are the information of %s",emp1->name);
             bound('_',40);
-            printf("工号：%d\n",emp1->num);
-            printf("职务：%s\n",emp1->duty);
-            printf("姓名：%s\n",emp1->name);
-            printf("性别：%s\n",emp1->sex);
-            printf("年龄：%d\n",emp1->age);
-            printf("文化程度：%s\n",emp1->edu);
-            printf("工资：%d\n",emp1->salary);
-            printf("办公电话：%s\n",emp1->tel_office);
-            printf("家庭电话：%s\n",emp1->tel_home);
-            printf("移动电话：%s\n",emp1->mobile);
-            printf("QQ号码：%s\n",emp1->qq);
-            printf("住址:%\ns",emp1->address);  
+            printf("job number:%d\n",emp1->num);
+            printf("duty:%s\n",emp1->duty);
+            printf("name:%s\n",emp1->name);
+            printf("sex:%s\n",emp1->sex);
+            printf("age:%d\n",emp1->age);
+            printf("edu:%s\n",emp1->edu);
+            printf("salary:%d\n",emp1->salary);
+            printf("tel_office：%s\n",emp1->tel_office);
+            printf("tel_home：%s\n",emp1->tel_home);
+            printf("mobile:%s\n",emp1->mobile);
+            printf("QQ:%s\n",emp1->qq);
+            printf("address:%s\n",emp1->address);  
             bound('_',40);
-            printf("您真的要删除该员工吗？(y/n)");
+            printf("Are you sure you want to delete the employee?(y/n)");
             
-            fflush(stdin);
+			fflush(stdin);
             choice=getchar();
             
             if(choice!='y' && choice!='Y') return;
@@ -276,7 +276,7 @@ void delemp()
     if(!findok)
     {
         bound('_',40);
-        printf("\n没有找到姓名是：%s的信息！\n",name);
+        printf("\n can't find the information of %s!\n",name);
         getchar();           
     } 
     return;
@@ -287,24 +287,24 @@ void displayemp(EMP *emp,char *field,char *name)
 {
     if(emp)
     {
-        printf("\n%s:%s信息如下：\n",field,name);
+        printf("\n %s:%s as followed:\n",field,name);
         bound('_',30); 
-        printf("工号：%d\n",emp->num);
-        printf("职务：%s\n",emp->duty);
-        printf("姓名：%s\n",emp->name);
-        printf("性别：%s\n",emp->sex);
-        printf("年龄：%d\n",emp->age);
-        printf("文化程度：%s\n",emp->edu);
-        printf("工资：%d\n",emp->salary);
-        printf("办公电话：%s\n",emp->tel_office);
-        printf("家庭电话：%s\n",emp->tel_home);
-        printf("移动电话：%s\n",emp->mobile);
-        printf("QQ号码：%s\n",emp->qq);
-        printf("住址:%s\n",emp->address);
+        printf("job number:%d\n",emp->num);
+        printf("duty:%s\n",emp->duty);
+        printf("name:%s\n",emp->name);
+        printf("sex:%s\n",emp->sex);
+        printf("age:%d\n",emp->age);
+        printf("edu:%s\n",emp->edu);
+        printf("salary:%d\n",emp->salary);
+        printf("tel_office：%s\n",emp->tel_office);
+        printf("tel_home：%s\n",emp->tel_home);
+        printf("mobile:%s\n",emp->mobile);
+        printf("QQ：%s\n",emp->qq);
+        printf("address:%s\n",emp->address);
         bound('_',30);      
     }else {
     bound('_',40);
-    printf("资料库中没有%s为：%s的员工！请重新确认！",field,name);
+    printf("No%s:we can't find %s in the library ! please confirm!",field,name);
     }
     return;
 }
@@ -378,15 +378,15 @@ void findemp()
      system("cls");
      
      do{
-         printf("\t查询员工信息\n");
+         printf("\t Check employee information \n");
          bound('_',30);
-         printf("\t1.按姓名查询\n");
-         printf("\t2.按工号查询\n");
-         printf("\t3.按电话查询\n");
-         printf("\t4.按QQ号查询\n");
-         printf("\t0.返回主菜单\n");
+         printf("\t1.Query by name\n");
+         printf("\t2.Query by number\n");
+         printf("\t3.Query by phone number\n");
+         printf("\t4.Query by QQ\n");
+         printf("\t0.Return to main menu\n");
          bound('_',30);
-         printf("\n请选择菜单：");
+         printf("\n Please select the menu:");
          
          do{
              fflush(stdin);
@@ -396,7 +396,7 @@ void findemp()
              switch(choice)
              {
                  case '1':
-                      printf("\n输入要查询的员工姓名：");
+                      printf("\n Enter the employee's name:");
                       scanf("%s",str);
                       
                       emp1=findname(str);
@@ -405,30 +405,28 @@ void findemp()
                       break; 
                       
                  case '2':
-                      printf("\n请输入要查询的员工的工号"); 
-                      scanf("%d",&num); 
-                      
+                      printf("\n Enter the employee's job number"); 
+                      scanf("%d",&num);  
                       emp1=findnum(num);
                       sprintf(num,str,10);
-                      displayemp(emp1,"工号",str);
+                      displayemp(emp1,"job number",str);
                       getchar();
                       break;
                       
                   case '3':
-                       printf("\n输入要查询员工的电话:");
-                       scanf("%s",str);
-                       
+                       printf("\n Enter the employee's phone number:");
+                       scanf("%s",str);  
                        emp1=findtelephone(str); 
-                       displayemp(emp1,"电话",str);
+                       displayemp(emp1,"phone number",str);
                        getchar();
                        break;
                        
                   case '4':
-                       printf("\n输入要查询的员工的QQ号：");
+                       printf("\n Enter the employee's QQ:");
                        scanf("%s",str);
                        
                        emp1=findqq(str);
-                       displayemp(emp1,"QQ号码",str);
+                       displayemp(emp1,"QQ",str);
                        getchar();
                        break;
                        
@@ -448,28 +446,28 @@ void listemp()
 {
     EMP *emp1;
     
-    printf("\n资料库中的员工信息列表\n");
+    printf("\n Library staff list\n");
     bound('_',40);
     emp1=emp_first;
     
     while(emp1) 
     {
-        printf("工号：%d\n",emp1->num);
-        printf("职务：%s\n",emp1->duty);
-        printf("姓名：%s\n",emp1->name);
-        printf("性别：%s\n",emp1->sex);
-        printf("年龄：%d\n",emp1->age);
-        printf("文化程度：%s\n",emp1->edu);
-        printf("工资：%d\n",emp1->salary);
-        printf("办公电话：%s\n",emp1->tel_office);
-        printf("家庭电话：%s\n",emp1->tel_home);
-        printf("移动电话：%s\n",emp1->mobile);
-        printf("QQ号码：%s\n",emp1->qq);
-        printf("住址:%s\n",emp1->address);  
+        printf("job number：%d\n",emp1->num);
+        printf("duty：%s\n",emp1->duty);
+        printf("name：%s\n",emp1->name);
+        printf("sex：%s\n",emp1->sex);
+        printf("age：%d\n",emp1->age);
+        printf("edu：%s\n",emp1->edu);
+        printf("salary：%d\n",emp1->salary);
+        printf("tel_office：%s\n",emp1->tel_office);
+        printf("tel_home：%s\n",emp1->tel_home);
+        printf("mobile：%s\n",emp1->mobile);
+        printf("QQ：%s\n",emp1->qq);
+        printf("address:%s\n",emp1->address);  
         bound('_',40);
         emp1=emp1->next;      
     }    
-    printf("\n显示完毕，按任意键退出！\n");
+    printf("\n press any key to exit !\n");
     getchar();
     return;
 }
@@ -482,14 +480,14 @@ void login()
     char pwd[9];
     
     do{
-        printf("请输入密码：");
+        printf("please enter the password:");
         for(i=0;i<8 && ((pwd[i]=getchar())!=13);i++)
             putchar('*');
-            
+        
         pwd[i]='\0';
         if(strcmp(pwd,password))
         {
-            printf("\n密码错误，请重新输入！\n");
+            printf("\n error please try again!\n");
             system("cls");
             n--;                        
         }else break;
@@ -497,7 +495,7 @@ void login()
     
     if(!n)
     {
-        printf("请退出，你的三次输入密码错误！");
+        printf("Please quit, you enter the wrong password three times！");
         getchar();
         exit(1);      
     }
@@ -511,18 +509,18 @@ void menu()
     system("cls");
     
     do{
-        printf("\t 企业员工管理系统\n");
+        printf("\t Employee Management System\n");
         bound('_',40);
-        printf("\t1.输入员工信息\n");
-        printf("\t2.查询员工信息\n");
-        printf("\t3.显示员工信息\n");
-        printf("\t4.修改员工信息\n");
-        printf("\t5.删除员工信息\n");
-        printf("\t6.统计员工信息\n");
-        printf("\t7.重置系统密码\n");
-        printf("\t0.退出系统\n");
+        printf("\t1.Enter employee information\n");
+        printf("\t2.Check employee information\n");
+        printf("\t3.Display employee information\n");
+        printf("\t4.Modify Employee Information\n");
+        printf("\t5.Delete employee information\n");
+        printf("\t6.Statistics Employee Information\n");
+        printf("\t7.Resetting the system password\n");
+        printf("\t0.Exit system\n");
         bound('_',40);
-        printf("\n请选择您需要的操作！");
+        printf("\n Please select!");
         
         do{
             fflush(stdin);
@@ -537,7 +535,7 @@ void menu()
                 case '2':
                    if(gfirst)
                    {
-                       printf("系统信息中无员工信息，请先添加员工信息！\n");
+                       printf("No employee information system information, please add employee information!\n");
                        getchar();
                        break;          
                    }  
@@ -547,7 +545,7 @@ void menu()
                 case '3':
                    if(gfirst)
                    {
-                       printf("系统信息中无员工信息，请先添加员工信息！\n");
+                       printf("No employee information system information, please add employee information!\n");
                        getchar();
                        break;       
                    }
@@ -557,7 +555,7 @@ void menu()
                case '4':
                    if(gfirst)
                    {
-                       printf("系统信息中无员工信息，请先添加员工信息！\n");
+                       printf("No employee information system information, please add employee information!\n");
                        getchar();
                        break;       
                    }
@@ -567,7 +565,7 @@ void menu()
                case '5':
                     if(gfirst)
                    {
-                       printf("系统信息中无员工信息，请先添加员工信息！\n");
+                       printf("No employee information system information, please add employee information!\n");
                        getchar();
                        break;       
                    }
@@ -577,7 +575,7 @@ void menu()
                case '6':
                     if(gfirst)
                    {
-                       printf("系统信息中无员工信息，请先添加员工信息！\n");
+                       printf("No employee information system information, please add employee information!\n");
                        getchar();
                        break;       
                    }
@@ -601,8 +599,8 @@ void menu()
 
 int modi_salary(int salary){
     int newsalary;
-    printf("原来的工资数为：%d",salary);
-    printf("新的工资数：");
+    printf("The original number of salary:%d",salary);
+    printf("The new salary:");
     scanf("%d",&newsalary);
     
     return(newsalary);
@@ -612,24 +610,25 @@ int modi_salary(int salary){
 
 int modi_age(int age){
     int newage;
-    printf("原来的年龄为：%d",age);
-    printf("新的年龄：");
+    printf("The original age：%d",age);
+    printf("new age：");
     scanf("%d",&newage);
     
     return(newage);
 }
+
 char *modi_field(char *field,char *content,int len)
 {
      char *str;
      str=malloc(sizeof(char)*len);
      if(str==NULL)
      {
-         printf("内存分配失败，按任意键退出！");
+         printf("Memory allocation failed, press any key to exit!");
          getchar();
          return NULL;             
      }
-     printf("原来%s为：%s\n",field,content);
-     printf("修改为（内容不要超过%d个字符！）：",len);
+     printf("%s was:%s before\n",field,content);
+     printf("Modified to(Not more than %d characters!):",len);
      scanf("%s",str);
      
      return str;
@@ -641,21 +640,21 @@ void modifyemp()
      char name[10],*newcontent;
      int choice;
      
-     printf("\n请输入您要修改的员工的信息:");
+     printf("\n please enter the name of the employee who you want to modify:");
      scanf("%s",&name);
      
      emp1=findname(name);
-     displayemp(emp1,"姓名",name);
+     displayemp(emp1,"name",name);
      
      if(emp1)
      {
-         printf("\n 请输入你要修改的内容选项！\n");
+         printf("\n please select\n");
          bound('_',40);
-         printf("1.修改职务                2.修改年龄\n");
-         printf("3.修改文化程度            4.修改工资\n");
-         printf("5.修改办公室电话          6.修改家庭电话\n");
-         printf("7.修改移动电话            8.修改QQ号码 \n");
-         printf("9.修改住址                0.返回\n  ");
+         printf("1.duty                    2.age\n");
+         printf("3.edu                     4.salary\n");
+         printf("5.tel_office              6.tel_home\n");
+         printf("7.mobile                  8.QQ \n");
+         printf("9.address                 0.exit\n  ");
          bound('_',40);
          
          do{
@@ -664,7 +663,7 @@ void modifyemp()
              switch(choice) 
              {
                  case '1':
-                      newcontent=modi_field("职务",emp1->duty,10);
+                      newcontent=modi_field("duty",emp1->duty,10);
                       if(newcontent!=NULL)
                       {
                           strcpy(emp1->duty,newcontent);
@@ -675,7 +674,7 @@ void modifyemp()
                       emp1->age=modi_age(emp1->age);
                       break;
                   case '3':
-                      newcontent=modi_field("文化程度",emp1->edu,10);
+                      newcontent=modi_field("edu",emp1->edu,10);
                       if(newcontent!=NULL)
                       {
                           strcpy(emp1->edu,newcontent);
@@ -686,7 +685,7 @@ void modifyemp()
                       emp1->salary=modi_salary(emp1->salary);
                       break;
                  case '5':
-                      newcontent=modi_field("办公室电话",emp1->tel_office,13);
+                      newcontent=modi_field("tel_office",emp1->tel_office,13);
                       if(newcontent!=NULL)
                       {
                           strcpy(emp1->tel_office,newcontent);
@@ -694,7 +693,7 @@ void modifyemp()
                       } 
                       break;
                  case '6':
-                      newcontent=modi_field("家庭电话",emp1->tel_home,13);
+                      newcontent=modi_field("tel_home",emp1->tel_home,13);
                       if(newcontent!=NULL)
                       {
                           strcpy(emp1->tel_home,newcontent);
@@ -702,7 +701,7 @@ void modifyemp()
                       } 
                       break;
                   case '7':
-                      newcontent=modi_field("移动电话",emp1->mobile,12);
+                      newcontent=modi_field("mobile",emp1->mobile,12);
                       if(newcontent!=NULL)
                       {
                           strcpy(emp1->mobile,newcontent);
@@ -710,7 +709,7 @@ void modifyemp()
                       } 
                       break;
                   case '8':
-                      newcontent=modi_field("QQ号码",emp1->qq,10);
+                      newcontent=modi_field("QQ",emp1->qq,10);
                       if(newcontent==NULL)
                       {
                           strcpy(emp1->qq,newcontent);
@@ -718,7 +717,7 @@ void modifyemp()
                       } 
                       break;  
                   case '9':
-                      newcontent=modi_field("住址",emp1->address,30);
+                      newcontent=modi_field("address",emp1->address,30);
                       if(newcontent!=NULL)
                       {
                           strcpy(emp1->address,newcontent);
@@ -732,7 +731,7 @@ void modifyemp()
          
          gsave=1;
          savedata();
-         printf("\n修改完毕，按任意键退出！\n");
+         printf("\n finished press any key to exit\n");
          getchar();
      }  
      return;   
@@ -757,7 +756,7 @@ void readdata(void)
         emp1=(EMP *)malloc(sizeof(EMP));
         if(emp1==NULL)
         {
-            printf("内存分配失败！\n");
+            printf("Memory allocation failure!\n");
             getchar();
             return;              
         }          
@@ -788,22 +787,22 @@ void resetpwd()
     
     system("cls");
     
-    printf("\n请输入旧密码：\n");
+    printf("\n Please enter your old password:\n");
      for(i=0;i<8 && ((pwd[i]=getchar())!=13);i++)
             putchar('*');
             
         pwd[i]='\0';
         if(strcmp(password,pwd)!=0)
         {
-            printf("\n密码错误，请按任意键退出！\n");
+            printf("\n error,press any key to exit!\n");
             getchar();
             return;             
         }   
      do{
-         printf("\n设置新密码，请不要超过8位：");
+         printf("\n set a new password, please don't beyond 8 numbers:");
             for(i=0;i<8&&((pwd[i]=getchar())!=13);i++)
                 putchar('*');
-            printf("\n再确认一次密码：");
+            printf("\n confirm the password:");
             for(i=0;i<8&&((pwd1[i]=getchar())!=13);i++) 
                 putchar('*');    
                 
@@ -811,14 +810,14 @@ void resetpwd()
             pwd1[i]='\0';
             
             if(strcmp(pwd,pwd1)!=0)
-                printf("\n两次密码输入不一致，请重新输入！\n\n");
+                printf("\n Enter the password twice inconsistent, please try again!\n\n");
             else break;
             
         }while(1);
         
         if((fp1=fopen("config.bat","wb"))==NULL)
         {
-            printf("\n系统创建失败，请按任意键退出！");
+            printf("\n The system creates failure, press any key to exit!");
             getchar();
             exit(1);                                        
         }
@@ -831,7 +830,7 @@ void resetpwd()
         }
         
         fclose(fp1);
-        printf("\n密码修改成功，按任意键退出！\n");
+        printf("\n Password changed successfully, press any key to exit!\n");
         getchar();
         return;       
 }
@@ -846,7 +845,7 @@ void savedata()
       
       if((fp=fopen("employee.dat","wb"))==NULL)
       {
-          printf("打开文件employee.dat出错！\n");
+          printf(" Open the file employee.dat wrong!\n");
           getchar();
           return;                                         
       }   
@@ -875,19 +874,19 @@ void summaryemp()
        sum+=emp1->salary;
        char strw[2];
        strncpy(strw,emp1->sex,2);
-       if((strcmp(strw,"ma")==0)||(strcmp(emp1->sex,"男")==0)) man++;
+       if((strcmp(strw,"ma")==0)||(strcmp(emp1->sex,"man")==0)) man++;
        else woman++;
        emp1=emp1->next;          
    }     
    
-   printf("\n下面是相关员工的统计信息！\n");
+   printf("\n There are statistics related to the staff!\n");
    bound('_',40);
-   printf("员工总数是：%d\n",num);
-   printf("员工的工资总数是：%d\n",sum);
-   printf("男员工数为：%d\n",man);
-   printf("女员工数为：%d\n",woman);
+   printf("Total number of employees:%d\n",num);
+   printf("The total number of salary employees are:%d\n",sum);
+   printf("Male employees are:%d\n",man);
+   printf("Number of female employees:%d\n",woman);
    bound('_',40);
-   printf("按任意键退出！\n");
+   printf("Press any key to exit!\n");
    getchar();
    return;
 }
